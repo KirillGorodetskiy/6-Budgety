@@ -167,6 +167,12 @@ var UIcontroller = (function() {
 			document.querySelector(DOMStrings.expensesLabel).textContent = obj.totalExp;
 			document.querySelector(DOMStrings.precentageLabel).textContent = obj.percentage;
 			
+			if ( obj.percentage > 0 ) {
+				document.querySelector(DOMStrings.precentageLabel).textContent = obj.percentage + '%';
+			} else {
+				document.querySelector(DOMStrings.precentageLabel).textContent = '----';
+			}
+			
 		},
 		
 		getDOMStrings: function() {
@@ -190,6 +196,8 @@ var controller = (function(budgetCtrl, UICtrl) {
 			ctrlAddItem();						
 			}	
 		});
+		
+		
 	}
 	
 	var updateBudget = function() {
@@ -228,7 +236,13 @@ var controller = (function(budgetCtrl, UICtrl) {
 	return {
 		init: function() {
 			console.log('Aplication starts');
-			setUPEventListeners();
+			UICtrl.displayBudget({
+				budget: 0,
+				totalInc: 0,
+				totalExp: 0,
+				percentage: -1
+			});
+			setUPEventListeners();			
 		}	
 	}
 
